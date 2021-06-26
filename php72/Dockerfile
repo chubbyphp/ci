@@ -24,6 +24,7 @@ RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu focal main" > /etc/apt/
 RUN apt-get update -y && apt-get install -y \
     php7.2-apcu \
     php7.2-ast \
+    php7.2-bcmath \
     php7.2-cli \
     php7.2-curl \
     php7.2-dev \
