@@ -28,6 +28,7 @@ RUN apt-get update -y && apt-get install -y \
     php8.0-cli \
     php8.0-curl \
     php8.0-dev \
+    php8.0-intl \
     php8.0-mbstring \
     php8.0-mongodb \
     php8.0-opcache \

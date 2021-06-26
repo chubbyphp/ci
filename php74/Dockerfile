@@ -28,6 +28,7 @@ RUN apt-get update -y && apt-get install -y \
     php7.4-cli \
     php7.4-curl \
     php7.4-dev \
+    php7.4-intl \
     php7.4-json \
     php7.4-mbstring \
     php7.4-mongodb \
