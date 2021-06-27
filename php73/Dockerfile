@@ -33,16 +33,15 @@ RUN apt-get update -y && apt-get install -y \
     php7.3-mbstring \
     php7.3-mongodb \
     php7.3-opcache \
+    php7.3-pcov \
     php7.3-pgsql \
     php7.3-readline \
     php7.3-sqlite \
+    php7.3-swoole \
     php7.3-xml \
     php7.3-zip
 
-RUN yes '' | pecl install pcov swoole
-
-RUN echo -e "extension=pcov.so" > /etc/php/7.3/cli/conf.d/20-pcov.ini \
-    && echo -e "extension=swoole.so" > /etc/php/7.3/cli/conf.d/20-swoole.ini \
+RUN echo -e "apc.enable_cli=On" >> /etc/php/7.3/cli/conf.d/20-apcu.ini \
     && echo -e "error_reporting = E_ALL\ndisplay_errors = On\ndisplay_startup_errors = On" > /etc/php/7.3/cli/conf.d/99-development.ini
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
