@@ -21,3 +21,9 @@ cd php80
 docker build -t chubbyphp/ci-php80:latest .
 docker push chubbyphp/ci-php80:latest
 ```
+
+```sh
+cd php81
+docker build -t chubbyphp/ci-php81:latest .
+docker push chubbyphp/ci-php81:latest
+```
