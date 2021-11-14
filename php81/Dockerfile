@@ -22,16 +22,21 @@ RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu focal main" > /etc/apt/
     # keys.andreas-puls.de
 
 RUN apt-get update -y && apt-get install -y \
+    php8.1-apcu \
+    php8.1-ast \
     php8.1-bcmath \
     php8.1-cli \
     php8.1-curl \
     php8.1-dev \
     php8.1-intl \
     php8.1-mbstring \
+    php8.1-mongodb \
     php8.1-opcache \
+    php8.1-pcov \
     php8.1-pgsql \
     php8.1-readline \
     php8.1-sqlite \
+    php8.1-swoole \
     php8.1-xml \
     php8.1-zip
 
