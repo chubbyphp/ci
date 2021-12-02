@@ -36,7 +36,7 @@ RUN apt-get update -y && apt-get install -y \
     php8.1-pgsql \
     php8.1-readline \
     php8.1-sqlite \
-    #php8.1-swoole \
+    php8.1-swoole \
     php8.1-xml \
     php8.1-zip
 
