@@ -41,7 +41,7 @@ RUN apt-get update -y && apt-get install -y \
     php8.1-zip
 
 RUN echo -e "apc.enable_cli=On" >> /etc/php/8.1/cli/conf.d/20-apcu.ini \
-    && echo -e "error_reporting = E_ALL\ndisplay_errors = On\ndisplay_startup_errors = On" > /etc/php/8.1/cli/conf.d/99-development.ini
+    && echo -e "error_reporting = E_ALL & ~E_DEPRECATED\ndisplay_errors = On\ndisplay_startup_errors = On" > /etc/php/8.1/cli/conf.d/99-development.ini
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
