@@ -41,6 +41,8 @@ RUN apt-get update -y && apt-get install -y \
     php7.2-xml \
     php7.2-zip
 
+RUN ln -sf /usr/bin/php7.2 /etc/alternatives/php
+
 RUN echo -e "apc.enable_cli=On" >> /etc/php/7.2/cli/conf.d/20-apcu.ini \
     && echo -e "error_reporting = E_ALL\ndisplay_errors = On\ndisplay_startup_errors = On" > /etc/php/7.2/cli/conf.d/99-development.ini
 

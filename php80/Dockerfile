@@ -40,6 +40,8 @@ RUN apt-get update -y && apt-get install -y \
     php8.0-xml \
     php8.0-zip
 
+RUN ln -sf /usr/bin/php8.0 /etc/alternatives/php
+
 RUN echo -e "apc.enable_cli=On" >> /etc/php/8.0/cli/conf.d/20-apcu.ini \
     && echo -e "error_reporting = E_ALL\ndisplay_errors = On\ndisplay_startup_errors = On" > /etc/php/8.0/cli/conf.d/99-development.ini
 
