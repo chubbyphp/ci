@@ -1,49 +1,45 @@
-FROM ubuntu:20.04
-
-ENV DEBIAN_FRONTEND=noninteractive
+FROM rockylinux:9.0
 
 SHELL ["/bin/bash", "-c"]
 
-RUN apt-get update -y && apt-get install -y \
-    curl \
+RUN dnf upgrade -y --refresh
+
+RUN dnf install -y epel-release https://rpms.remirepo.net/enterprise/remi-release-9.rpm
+
+RUN dnf install -y --nobest \
+    compat-openssl11 \
     git \
-    gnupg2 \
-    locales \
-    netcat \
-    openssh-client \
-    tzdata \
-    unzip
+    glibc-langpack-de \
+    langpacks-de \
+    nmap-ncat \
+    php80-php-ast \
+    php80-php-bcmath \
+    php80-php-cli \
+    php80-php-devel \
+    php80-php-intl \
+    php80-php-mbstring \
+    php80-php-opcache \
+    php80-php-pecl-apcu \
+    php80-php-pecl-memcached \
+    php80-php-pecl-mongodb \
+    php80-php-pecl-pcov \
+    php80-php-pecl-swoole4 \
+    php80-php-pecl-zip \
+    php80-php-pgsql \
+    php80-php-sodium \
+    php80-php-xml \
+    procps-ng \
+    sudo \
+    supervisor \
+    unzip \
+    vim \
+    zsh
 
-RUN locale-gen de_CH.UTF-8 && update-locale LANG=de_CH.UTF-8 LC_ALL=de_CH.UTF-8 \
-    && cp -f /usr/share/zoneinfo/Europe/Zurich /etc/localtime && dpkg-reconfigure --frontend noninteractive tzdata
+RUN ln -sf /usr/bin/php80 /usr/bin/php \
+    && echo "extension=pcov.so" > /etc/opt/remi/php80/php.d/40-pcov.ini
 
-RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu focal main" > /etc/apt/sources.list.d/ondrej-ubuntu-php.list \
-    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
-    # keys.andreas-puls.de
-
-RUN apt-get update -y && apt-get install -y \
-    php8.0-apcu \
-    php8.0-ast \
-    php8.0-bcmath \
-    php8.0-cli \
-    php8.0-curl \
-    php8.0-dev \
-    php8.0-intl \
-    php8.0-mbstring \
-    php8.0-mongodb \
-    php8.0-opcache \
-    php8.0-pcov \
-    php8.0-pgsql \
-    php8.0-readline \
-    php8.0-sqlite \
-    php8.0-swoole \
-    php8.0-xml \
-    php8.0-zip
-
-RUN ln -sf /usr/bin/php8.0 /etc/alternatives/php
-
-RUN echo -e "apc.enable_cli=On" >> /etc/php/8.0/cli/conf.d/20-apcu.ini \
-    && echo -e "error_reporting = E_ALL\ndisplay_errors = On\ndisplay_startup_errors = On" > /etc/php/8.0/cli/conf.d/99-development.ini
+RUN echo "LANG=de_CH.UTF-8" > /etc/locale.conf \
+    && cp -f /usr/share/zoneinfo/Europe/Zurich /etc/localtime
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
