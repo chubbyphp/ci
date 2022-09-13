@@ -23,7 +23,7 @@ RUN dnf install -y --nobest \
     php80-php-pecl-memcached \
     php80-php-pecl-mongodb \
     php80-php-pecl-pcov \
-    php80-php-pecl-swoole4 \
+    php80-php-pecl-swoole5 \
     php80-php-pecl-zip \
     php80-php-pgsql \
     php80-php-sodium \
