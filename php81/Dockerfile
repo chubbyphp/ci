@@ -36,6 +36,7 @@ RUN dnf install -y --nobest \
     zsh
 
 RUN ln -sf /usr/bin/php81 /usr/bin/php \
+    && echo "apc.enable_cli=On" >> /etc/opt/remi/php81/php.d/40-apcu.ini \
     && echo "extension=pcov.so" > /etc/opt/remi/php81/php.d/40-pcov.ini
 
 RUN echo "LANG=de_CH.UTF-8" > /etc/locale.conf \
