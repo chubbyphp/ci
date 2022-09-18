@@ -22,8 +22,8 @@ RUN dnf install -y --nobest \
     php80-php-pecl-apcu \
     php80-php-pecl-memcached \
     php80-php-pecl-mongodb \
-    php80-php-pecl-pcov \
     php80-php-pecl-swoole5 \
+    php80-php-pecl-xdebug3 \
     php80-php-pecl-zip \
     php80-php-pgsql \
     php80-php-sodium \
@@ -37,7 +37,7 @@ RUN dnf install -y --nobest \
 
 RUN ln -sf /usr/bin/php80 /usr/bin/php \
     && echo "apc.enable_cli=On" >> /etc/opt/remi/php80/php.d/40-apcu.ini \
-    && echo "extension=pcov.so" > /etc/opt/remi/php80/php.d/40-pcov.ini
+    && echo "xdebug.mode=coverage" >> /etc/opt/remi/php80/php.d/15-xdebug.ini
 
 RUN echo "LANG=de_CH.UTF-8" > /etc/locale.conf \
     && cp -f /usr/share/zoneinfo/Europe/Zurich /etc/localtime
