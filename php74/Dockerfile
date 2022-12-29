@@ -1,50 +1,46 @@
-FROM ubuntu:20.04
-
-ENV DEBIAN_FRONTEND=noninteractive
+FROM rockylinux:9.1
 
 SHELL ["/bin/bash", "-c"]
 
-RUN apt-get update -y && apt-get install -y \
-    curl \
+RUN dnf upgrade -y --refresh
+
+RUN dnf install -y epel-release https://rpms.remirepo.net/enterprise/remi-release-9.1.rpm
+
+RUN dnf install -y --nobest \
+    compat-openssl11 \
     git \
-    gnupg2 \
-    locales \
-    netcat \
-    openssh-client \
-    tzdata \
-    unzip
+    glibc-langpack-de \
+    langpacks-de \
+    nmap-ncat \
+    php74-php-ast \
+    php74-php-bcmath \
+    php74-php-cli \
+    php74-php-devel \
+    php74-php-intl \
+    php74-php-mbstring \
+    php74-php-opcache \
+    php74-php-pecl-apcu \
+    php74-php-pecl-memcached \
+    php74-php-pecl-mongodb \
+    php74-php-pecl-swoole4 \
+    php74-php-pecl-xdebug3 \
+    php74-php-pecl-zip \
+    php74-php-pgsql \
+    php74-php-sodium \
+    php74-php-xml \
+    procps-ng \
+    sudo \
+    supervisor \
+    unzip \
+    vim \
+    zsh
 
-RUN locale-gen de_CH.UTF-8 && update-locale LANG=de_CH.UTF-8 LC_ALL=de_CH.UTF-8 \
-    && cp -f /usr/share/zoneinfo/Europe/Zurich /etc/localtime && dpkg-reconfigure --frontend noninteractive tzdata
+RUN ln -sf /usr/bin/php74 /usr/bin/php \
+    && echo "apc.enable_cli=On" >> /etc/opt/remi/php74/php.d/40-apcu.ini \
+    && echo "xdebug.mode=coverage" >> /etc/opt/remi/php74/php.d/15-xdebug.ini
 
-RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu focal main" > /etc/apt/sources.list.d/ondrej-ubuntu-php.list \
-    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
-    # keys.andreas-puls.de
-
-RUN apt-get update -y && apt-get install -y \
-    php7.4-apcu \
-    php7.4-ast \
-    php7.4-bcmath \
-    php7.4-cli \
-    php7.4-curl \
-    php7.4-dev \
-    php7.4-intl \
-    php7.4-json \
-    php7.4-mbstring \
-    php7.4-mongodb \
-    php7.4-opcache \
-    php7.4-pcov \
-    php7.4-pgsql \
-    php7.4-readline \
-    php7.4-sqlite \
-    php7.4-swoole \
-    php7.4-xml \
-    php7.4-zip
-
-RUN ln -sf /usr/bin/php7.4 /etc/alternatives/php
-
-RUN echo -e "apc.enable_cli=On" >> /etc/php/7.4/cli/conf.d/20-apcu.ini \
-    && echo -e "error_reporting = E_ALL\ndisplay_errors = On\ndisplay_startup_errors = On" > /etc/php/7.4/cli/conf.d/99-development.ini
+RUN echo "LANG=de_CH.UTF-8" > /etc/locale.conf \
+    && cp -f /usr/share/zoneinfo/Europe/Zurich /etc/localtime
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
