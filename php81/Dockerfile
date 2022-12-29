@@ -1,10 +1,10 @@
-FROM rockylinux:9.0
+FROM rockylinux:9.1
 
 SHELL ["/bin/bash", "-c"]
 
 RUN dnf upgrade -y --refresh
 
-RUN dnf install -y epel-release https://rpms.remirepo.net/enterprise/remi-release-9.rpm
+RUN dnf install -y epel-release https://rpms.remirepo.net/enterprise/remi-release-9.1.rpm
 
 RUN dnf install -y --nobest \
     compat-openssl11 \
