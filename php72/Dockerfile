@@ -1,50 +1,48 @@
-FROM ubuntu:20.04
-
-ENV DEBIAN_FRONTEND=noninteractive
+FROM rockylinux:8.7
 
 SHELL ["/bin/bash", "-c"]
 
-RUN apt-get update -y && apt-get install -y \
-    curl \
+RUN dnf upgrade -y --refresh
+
+RUN dnf install -y dnf-plugins-core && dnf config-manager --set-enabled powertools
+
+RUN dnf install -y epel-release https://rpms.remirepo.net/enterprise/remi-release-8.7.rpm
+
+RUN dnf install -y --nobest \
+    openssl \
     git \
-    gnupg2 \
-    locales \
-    netcat \
-    openssh-client \
-    tzdata \
-    unzip
+    glibc-langpack-de \
+    langpacks-de \
+    nmap-ncat \
+    php72-php-ast \
+    php72-php-bcmath \
+    php72-php-cli \
+    php72-php-devel \
+    php72-php-intl \
+    php72-php-mbstring \
+    php72-php-opcache \
+    php72-php-pecl-apcu \
+    php72-php-pecl-memcached \
+    php72-php-pecl-mongodb \
+    php72-php-pecl-swoole4 \
+    php72-php-pecl-xdebug3 \
+    php72-php-pecl-zip \
+    php72-php-pgsql \
+    php72-php-sodium \
+    php72-php-xml \
+    procps-ng \
+    sudo \
+    supervisor \
+    unzip \
+    vim \
+    zsh
 
-RUN locale-gen de_CH.UTF-8 && update-locale LANG=de_CH.UTF-8 LC_ALL=de_CH.UTF-8 \
-    && cp -f /usr/share/zoneinfo/Europe/Zurich /etc/localtime && dpkg-reconfigure --frontend noninteractive tzdata
+RUN ln -sf /usr/bin/php72 /usr/bin/php \
+    && echo "apc.enable_cli=On" >> /etc/opt/remi/php72/php.d/40-apcu.ini \
+    && echo "xdebug.mode=coverage" >> /etc/opt/remi/php72/php.d/15-xdebug.ini
 
-RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu focal main" > /etc/apt/sources.list.d/ondrej-ubuntu-php.list \
-    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
-    # keys.andreas-puls.de
-
-RUN apt-get update -y && apt-get install -y \
-    php7.2-apcu \
-    php7.2-ast \
-    php7.2-bcmath \
-    php7.2-cli \
-    php7.2-curl \
-    php7.2-dev \
-    php7.2-intl \
-    php7.2-json \
-    php7.2-mbstring \
-    php7.2-mongodb \
-    php7.2-opcache \
-    php7.2-pcov \
-    php7.2-pgsql \
-    php7.2-readline \
-    php7.2-sqlite \
-    php7.2-swoole \
-    php7.2-xml \
-    php7.2-zip
-
-RUN ln -sf /usr/bin/php7.2 /etc/alternatives/php
-
-RUN echo -e "apc.enable_cli=On" >> /etc/php/7.2/cli/conf.d/20-apcu.ini \
-    && echo -e "error_reporting = E_ALL\ndisplay_errors = On\ndisplay_startup_errors = On" > /etc/php/7.2/cli/conf.d/99-development.ini
+RUN echo "LANG=de_CH.UTF-8" > /etc/locale.conf \
+    && cp -f /usr/share/zoneinfo/Europe/Zurich /etc/localtime
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
