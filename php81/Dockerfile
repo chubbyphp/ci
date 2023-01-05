@@ -39,8 +39,10 @@ RUN ln -sf /usr/bin/php81 /usr/bin/php \
     && echo "apc.enable_cli=On" >> /etc/opt/remi/php81/php.d/40-apcu.ini \
     && echo "xdebug.mode=coverage" >> /etc/opt/remi/php81/php.d/15-xdebug.ini
 
+ENV TZ=Europe/Zurich
+
 RUN echo "LANG=de_CH.UTF-8" > /etc/locale.conf \
-    && cp -f /usr/share/zoneinfo/Europe/Zurich /etc/localtime
+    && cp -f /usr/share/zoneinfo/${TZ} /etc/localtime
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
