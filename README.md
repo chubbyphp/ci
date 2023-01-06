@@ -1,3 +1,5 @@
+# ci
+
 ```sh
 cd php72
 docker build -t chubbyphp/ci-php72:latest .
@@ -33,3 +35,7 @@ cd php82
 docker build -t chubbyphp/ci-php82:latest .
 docker push chubbyphp/ci-php82:latest
 ```
+
+## Copyright
+
+2023 Dominik Zogg
