@@ -1,4 +1,4 @@
-FROM rockylinux:8.7
+FROM rockylinux:8.8
 
 SHELL ["/bin/bash", "-c"]
 
@@ -6,7 +6,7 @@ RUN dnf upgrade -y --refresh
 
 RUN dnf install -y dnf-plugins-core && dnf config-manager --set-enabled powertools
 
-RUN dnf install -y epel-release https://rpms.remirepo.net/enterprise/remi-release-8.7.rpm
+RUN dnf install -y epel-release https://rpms.remirepo.net/enterprise/remi-release-8.8.rpm
 
 RUN dnf install -y --nobest \
     openssl \
