@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+git config --global --add safe.directory $PWD
+
 php -v
 echo "composer update ${COMPOSER_ARGS}"
 composer update $COMPOSER_ARGS
