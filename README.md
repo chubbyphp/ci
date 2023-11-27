@@ -36,6 +36,12 @@ docker build --platform linux/amd64 -t chubbyphp/ci-php82:latest .
 docker push chubbyphp/ci-php82:latest
 ```
 
+```sh
+cd php83
+docker build --platform linux/amd64 -t chubbyphp/ci-php83:latest .
+docker push chubbyphp/ci-php83:latest
+```
+
 ## Copyright
 
 2023 Dominik Zogg
