@@ -2,6 +2,8 @@
 set -e
 
 php -v
+php -i | grep memory_limit
+
 echo "composer update ${COMPOSER_ARGS}"
 composer update $COMPOSER_ARGS
 echo "composer test"

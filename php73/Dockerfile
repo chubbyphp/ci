@@ -39,7 +39,8 @@ RUN dnf install -y --nobest \
 
 RUN ln -sf /usr/bin/php73 /usr/bin/php \
     && echo "apc.enable_cli=On" >> /etc/opt/remi/php73/php.d/40-apcu.ini \
-    && echo "xdebug.mode=coverage" >> /etc/opt/remi/php73/php.d/15-xdebug.ini
+    && echo "xdebug.mode=coverage" >> /etc/opt/remi/php73/php.d/15-xdebug.ini \
+    && echo 'memory_limit=256M' >> /etc/opt/remi/php73/php.ini
 
 ENV TZ=Europe/Zurich
 
