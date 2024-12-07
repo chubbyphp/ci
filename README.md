@@ -37,9 +37,15 @@ docker push ghcr.io/chubbyphp/ci-php82:latest
 ```
 
 ```sh
-cd php72
-docker build --platform linux/amd64 -t ghcr.io/chubbyphp/ci-php72:latest .
-docker push ghcr.io/chubbyphp/ci-php72:latest
+cd php83
+docker build --platform linux/amd64 -t ghcr.io/chubbyphp/ci-php83:latest .
+docker push ghcr.io/chubbyphp/ci-php83:latest
+```
+
+```sh
+cd php84
+docker build --platform linux/amd64 -t ghcr.io/chubbyphp/ci-php84:latest .
+docker push ghcr.io/chubbyphp/ci-php84:latest
 ```
 
 ## Copyright
