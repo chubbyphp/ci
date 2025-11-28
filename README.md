@@ -56,6 +56,13 @@ docker push ghcr.io/chubbyphp/ci-php84:latest
 cd ..
 ```
 
+```sh
+cd php85
+docker build --platform linux/amd64 -t ghcr.io/chubbyphp/ci-php85:latest .
+docker push ghcr.io/chubbyphp/ci-php85:latest
+cd ..
+```
+
 ## Copyright
 
 2025 Dominik Zogg
