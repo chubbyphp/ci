@@ -22,7 +22,7 @@ RUN dnf install -y --nobest \
     php82-php-pecl-memcached \
     php82-php-pecl-mongodb \
     php82-php-pecl-redis \
-    php82-php-pecl-swoole5 \
+    php82-php-pecl-swoole6 \
     php82-php-pecl-xdebug3 \
     php82-php-pecl-zip \
     php82-php-pgsql \
